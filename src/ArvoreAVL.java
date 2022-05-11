@@ -146,7 +146,7 @@ public class ArvoreAVL {
         return -1;//Temporário
     }
 
-    private Boolean verefica_ArvoreVazia(){
+    private Boolean verefica_ArvoreVazia(){//verefica arvore.
         return raiz == null ? true : false;
 
     }
