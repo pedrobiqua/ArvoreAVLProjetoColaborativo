@@ -36,14 +36,14 @@ public class ArvoreAVL {
             }
         }
     }
-    /* A jeitar e terminar amanhã/ coverter para string/ testar
-    public void remover(int texto){
-        NoABin atual = this.raiz;
-        NoABin paiAtual = null;
+    // A jeitar e terminar amanhã/ coverter para string/ testar
+    public void remove_elemento(String texto){
+        NoAVL atual = this.raiz;
+        NoAVL paiAtual = null;
         while(atual != null){
-            if (atual.valor == texto) {
+            if (atual.texto == texto) {
                 break;
-            } else if (atual.valor < texto){
+            } else if (atual.texto.compareTo(texto) <= -1){  //atual.texto < texto
                 paiAtual = atual;
                 atual = atual.esquerdo;
             } else {
@@ -54,15 +54,15 @@ public class ArvoreAVL {
 
         if (atual != null) {
             if (atual.direito != null) {
-                NoABin substituto = atual.direito;
-                NoABin paiSubstituto = null;
+                NoAVL substituto = atual.direito;
+                NoAVL paiSubstituto = null;
                 while(substituto.esquerdo != null){
                     paiSubstituto = substituto;
                     substituto = substituto.esquerdo;
                 }
                 substituto = atual.esquerdo;
                 if (paiAtual != null){
-                    if (substituto.valor > paiSubstituto.valor) {
+                    if (substituto.texto.compareTo(paiSubstituto.texto) >= 0) { //substituto.texto > paiSubstituto.texto
                         paiSubstituto.direito = substituto;
                     } else {
                         paiSubstituto.esquerdo = substituto;
@@ -70,21 +70,21 @@ public class ArvoreAVL {
                 } else {
                     this.raiz = substituto;
                 }
-                if (substituto.valor > paiSubstituto.valor) {
+                if (substituto.texto.compareTo(paiSubstituto.texto) >=0) { // substituto.valor > paiSubstituto.valor
                     paiAtual.esquerdo = null;
                 } else {
                     paiAtual.direito = null;
                 }
                 
             } else if (atual.esquerdo != null) {
-                NoABin substituto = atual.esquerdo;
-                NoABin paiSubstituto = null;
+                NoAVL substituto = atual.esquerdo;
+                NoAVL paiSubstituto = null;
                 while(substituto.direito != null){
                     paiSubstituto = substituto;
                     substituto = substituto.direito;
                 }
                 if (paiAtual != null){
-                    if (substituto.valor > paiSubstituto.valor) {
+                    if (substituto.texto.compareTo(paiSubstituto.texto) >= 0 ) { // substituto.valor > paiSubstituto.valor
                         paiSubstituto.direito = substituto;
                     } else {
                         paiSubstituto.esquerdo = substituto;
@@ -93,7 +93,7 @@ public class ArvoreAVL {
                     this.raiz = substituto;
                 }
 
-                if (substituto.valor > paiSubstituto.valor) {
+                if (substituto.texto.compareTo(paiSubstituto.texto) >= 0) { //substituto.valor > paiSubstituto.valor
                     paiAtual.esquerdo = null;
                 } else {
                     paiAtual.direito = null;
@@ -101,7 +101,7 @@ public class ArvoreAVL {
 
             } else {
                 if (paiAtual != null){
-                    if (atual.valor > paiAtual.valor) {
+                    if (atual.texto.compareTo(paiAtual.texto) >= 0) { //atual.valor > paiAtual.valor
                         paiAtual.direito = null;
                     } else {
                         paiAtual.esquerdo = null;
@@ -111,11 +111,6 @@ public class ArvoreAVL {
                 }
             }
         }
-    }
-    */
-
-    public void remove_elemento( String texto ) {//Falta fazer
-        
     }
 
     public void existe_elemento(NoAVL no, String texto ){//Falta fazer
