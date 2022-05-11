@@ -113,7 +113,7 @@ public class ArvoreAVL {
         }
     }
 
-    public void existe_elemento(NoAVL no, String texto ){//Falta fazer
+    public void existe_elemento( String texto ){//Falta fazer
 
     }
 
