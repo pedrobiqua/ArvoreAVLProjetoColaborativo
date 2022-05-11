@@ -141,13 +141,38 @@ public class ArvoreAVL {
         }
     }
 
-    public int altura( NoAVL no ){//Falta fazer
-        
-        return -1;//Temporário
+    public int altura(){//retorna autura da arvore
+        if(verefica_ArvoreVazia()) {
+            return -1;
+        }
+        int esq = this.raiz.esquerdo.altura; //Está bugado
+        int dir = this.raiz.direito.altura; //Está bugado
+        if(esq > dir){
+            return(esq + 1);
+        }
+        else{
+            return(dir + 1);
+        }
     }
 
     private Boolean verefica_ArvoreVazia(){//verefica arvore.
         return raiz == null ? true : false;
 
+    }
+
+    public Boolean existe_elemento(String texto_a_checar){//Vereficar se está correto
+        if(this.verefica_ArvoreVazia()){
+            return(false);
+        }
+        int resultado = this.raiz.texto.compareTo(texto_a_checar);
+        if(resultado == 0){
+            return(true);
+        }
+        if(resultado > 0 ){
+            return(this.existe_elemento(texto_a_checar));
+        }
+        else{
+            return(this.existe_elemento(texto_a_checar));
+        }
     }
 }
