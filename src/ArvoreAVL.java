@@ -1,6 +1,8 @@
 public class ArvoreAVL {
     NoAVL raiz;
 
+    //aaa
+
     public ArvoreAVL(NoAVL raiz) {//Falta fazer
         this.raiz = raiz;
     }

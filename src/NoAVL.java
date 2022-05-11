@@ -1,4 +1,5 @@
 public class NoAVL {
+    
     public NoAVL direito;
     public NoAVL esquerdo;
     public int altura;
