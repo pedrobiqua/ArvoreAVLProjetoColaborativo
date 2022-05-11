@@ -113,10 +113,6 @@ public class ArvoreAVL {
         }
     }
 
-    public void existe_elemento(NoAVL no, String texto ){//Falta fazer
-
-    }
-
     public void imprime_preOrdem( NoAVL no ){
         if ( no != null ) {
             System.out.print(no.texto + " ");
@@ -141,13 +137,36 @@ public class ArvoreAVL {
         }
     }
 
-    public int altura( NoAVL no ){//Falta fazer
-        
-        return -1;//Temporário
-    }
-
     private Boolean verefica_ArvoreVazia(){//verefica arvore.
         return raiz == null ? true : false;
 
     }
+        public int altura(){//retorna autura da arvore
+        if(this.raiz.verefica_ArvoreVazia()) {
+            return(-1);
+        }
+        int esq = this.raiz.esquerdo.autura();
+        int dir = this.raiz.direito.autura();
+        if(esq > dir){
+            return(esq + 1);
+        }
+        else{
+            return(dir + 1);
+        }
+    }
+
+        public bool existe_elemento(String texto_a_checar){//Ve se o elemento existe
+        if(this.verefica_ArvoreVazia()){
+            ruturn(false);
+        }
+        int resultado = this.raiz.texto.compareTo(texto_a_checar);
+        if(resultado == 0){
+            return(true);
+        }
+        if(resultado > 0 ){
+            return(this.direito.existe_elemento(texto_a_checar));
+        }
+        else{
+            return(this.esquerdo.existe_elemento(texto_a_checar));
+        }
 }
