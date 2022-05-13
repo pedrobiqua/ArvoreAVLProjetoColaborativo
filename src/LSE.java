@@ -7,57 +7,61 @@ public class LSE {
         this.ultimo = null;
     }
 
-    public boolean vazia() {
+    public boolean vazio() {
         return(this.primeiro == null);
     }
 
-    public void inserePrimeiro(String palavra, int freq, String nomeArquivo) {
-        No p = new No(palavra,freq,nomeArquivo);
-        if(vazia()) {
+    public void inserePrimeiro(String texto, int frequencia, String nomeArquivo) {
+        No p = new No(texto,frequencia,nomeArquivo);
+        if(vazio()) {
             this.primeiro = p;
             this.ultimo = p;
-        } else {
+        }
+        else {
             p.proximo = this.primeiro;
             this.primeiro = p;
         }
     }
 
-    public void insereUltimo(String palavra, int freq, String nomeArquivo) {
-        if(vazia()) {
-            inserePrimeiro(palavra, freq, nomeArquivo);
-        } else {
-            No p = new No(palavra, freq, nomeArquivo);
+    public void insereUltimo(String texto, int frequencia, String nomeArquivo) {
+        if(vazio()) {
+            inserePrimeiro(texto, frequencia, nomeArquivo);
+        }
+        else {
+            No p = new No(texto, frequencia, nomeArquivo);
             this.ultimo.proximo = p;
             this.ultimo = p;
         }
     }
 
-    public void insereOrdenado(String palavra, int freq, String nomeArquivo) {
-        if(vazia() || freq <= primeiro.freq) {
-            inserePrimeiro(palavra, freq, nomeArquivo);
-        } else if(freq >= ultimo.freq) {
-            insereUltimo(palavra, freq, nomeArquivo);
-        } else {
+    public void insereOrdenado(String texto, int frequencia, String nomeArquivo) {
+        if(vazio() || frequencia <= primeiro.frequencia) { // se a frequencia é menor que a frequencia na primeiro texto
+            inserePrimeiro(texto, frequencia, nomeArquivo);
+        }
+        else if(frequencia >= ultimo.frequencia) {
+            insereUltimo(texto, frequencia, nomeArquivo);
+        }
+        else {
             No x = primeiro;
             No y = null;
-            while(freq > x.freq) {
+            while(frequencia > x.frequencia) {
                 y = x;
                 x = x.proximo;
             }
-            No p = new No(palavra,freq, nomeArquivo);
+            No p = new No(texto,frequencia, nomeArquivo);
             p.proximo = x;
             y.proximo = p;
         }
     }
 
     public boolean imprime() {
-        if (vazia()) {
+        if (vazio()) {
             return false;
         }
         No no = primeiro;
-        System.out.println("Palavra:"+primeiro.texto);
+        System.out.println("texto:"+primeiro.texto);
         while (no != null) {
-            System.out.println("Nome do Arquivo: '"+no.nomeArquivo+"' || Frequência: "+no.freq);
+            System.out.println("Nome do Arquivo: '"+no.nomeArquivo+"' || frequencia: "+no.frequencia);
             no = no.proximo;
         }
         return true;

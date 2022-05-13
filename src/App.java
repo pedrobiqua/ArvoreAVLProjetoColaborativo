@@ -2,74 +2,82 @@ import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.Scanner; // Import the Scanner class to read text files
 
-class App {
-    public ArvoreAVL teste(File f) throws FileNotFoundException {
-        File[] listaDeArquivos = f.listFiles();
-        ArvoreAVL a = new ArvoreAVL();
-        a.raiz = new NoAVL();
+public class App {
+    public ArvoreAVL teste(File f) throws FileNotFoundException { // caso nao tenha nenhum arquivo
+        File[] listaDeArquivos = f.listFiles();  // vai criar um array de arquivos, listar todos os arquivos dentro da pasta
+        ArvoreAVL a = new ArvoreAVL(); // instanciar a ArvoreAVL
+        a.raiz = new NoAVL(); // iniciando a raiz da ArvoreAVL
 
-        for(int i = 0; i < listaDeArquivos.length;i++) {
-            Scanner sc = new Scanner(listaDeArquivos[i]);
-            String nomeArquivo = listaDeArquivos[i].getName();
+        for(int i = 0; i < listaDeArquivos.length;i++) { // passamos por todas as textos de todos os arquivos e por todos os arquivos
+            Scanner sc = new Scanner(listaDeArquivos[i]); // escanenando as textos dentro do arquivo
+            String nomeArquivo = listaDeArquivos[i].getName(); // guardar o nome do arquivo, pra printar depois
 
-            while(sc.hasNext()) {
-                String texto = sc.next();
-                NoAVL no = a.raiz;
-                if(verifica(a.raiz,texto)) {
-                    while(no != null) {
+            while(sc.hasNext()) {  // enquanto nao chegou no final do arquivo ele vai lendo as textos
+                String texto = sc.next(); // texto que ele esta no momento
+                NoAVL no = a.raiz; // vai puxar a raiz
+                if(verifica(a.raiz,texto)) { // verificar se a texto ja existe na ArvoreAVL
+                    while(no != null) { // precorrer a ArvoreAVL dependendo se der positivo ou negativo
                         if(texto.compareTo(no.lista.primeiro.texto) == 0) {
-                            break;
-                        }else if(texto.compareTo(no.lista.primeiro.texto) > 0) {
-                            no = no.direita;
-                        }else if(texto.compareTo(no.lista.primeiro.texto) < 0) {
-                            no = no.esquerda;
+                            break; // achou a texto
+                        }
+                        else if(texto.compareTo(no.lista.primeiro.texto) >= 0) {
+                            no = no.direito;  // andar pra direito
+                        }
+                        else if(texto.compareTo(no.lista.primeiro.texto) < 0) {
+                            no = no.esquerdo; // andar esquerdo
                         }
                     }
 
-                    No x = no.lista.primeiro;
-                    while (x != null) {
-                        if (x.nomeArquivo.equals(nomeArquivo)) {
-                            x.freq++;
+                    No x = no.lista.primeiro; // recebe a lista da posicao X
+                    while (x != null) { // enquanto ele nao for nulo
+                        if (x.nomeArquivo.equals(nomeArquivo)) { // se estiver no mesmo arquivo vai somar a frequencia da texto
+                            x.frequencia++;
                             break;
                         }
-                        x = x.proximo;
+                        x = x.proximo; // passando pela lista
                     }
                     if(x == null) {
-                        no.lista.insereOrdenado(texto, 1, nomeArquivo);
+                        no.lista.insereOrdenado(texto, 1, nomeArquivo); // caso nao ache a texto ele vai inserir um novo No na lista da texto
                     }
-                }else {
-                    a.insere_elemento(a, texto, 1, nomeArquivo);
+                }
+                else {
+                    a.insere_elemento(a, texto, 1, nomeArquivo); //se nao tiver nenhuma texto que estamos verificando dentro da ArvoreAVL
+                    // vai ser criado um No na ArvoreAVL com a texto
                 }
             }
-            sc.close();
+            sc.close(); // fecha o arquivo que tinha aberto
         }
-        return a;
+        return a; // retorna a ArvoreAVL
     }
 
-    public boolean verifica(NoAVL no, String texto) throws FileNotFoundException{
+    public boolean verifica(NoAVL no, String texto) throws FileNotFoundException{ // verificar se existe uma texto em uma ArvoreAVL (recursivo)
         if (no == null || no.lista.primeiro == null) {
             return false;
-        }else if(texto.compareTo(no.lista.primeiro.texto) == 0) {
+        }
+        else if(texto.compareTo(no.lista.primeiro.texto) == 0) {
             return true;
-        }else if(texto.compareTo(no.lista.primeiro.texto) > 0) {
-            return verifica(no.direita,texto);
-        }else if(texto.compareTo(no.lista.primeiro.texto) < 0) {
-            return verifica(no.esquerda,texto);
+        }
+        else if(texto.compareTo(no.lista.primeiro.texto) >= 0) {
+            return verifica(no.direito,texto);
+        }
+        else if(texto.compareTo(no.lista.primeiro.texto) < 0) {
+            return verifica(no.esquerdo,texto);
         }
         return false;
     }
 
-    public void pesquisa(ArvoreAVL a, String texto) throws FileNotFoundException {
-        if (!this.verifica(a.raiz, texto)) {
+    public void pesquisa(ArvoreAVL n, String texto) throws FileNotFoundException {
+        if (!this.verifica(n.raiz, texto)) { // verificar se a palavre que esta sendo pesquisada existe na ArvoreAVL
             System.out.println("Essa texto não foi encontrada.");
-        } else {
-            NoAVL x = a.raiz;
+        }
+        else {
+            NoAVL x = n.raiz; // passar a raiz
 
-            while(texto.compareTo(x.lista.primeiro.texto) != 0) {
-                if (texto.compareTo(x.lista.primeiro.texto) > 0) {
-                    x = x.direita;
+            while(texto.compareTo(x.lista.primeiro.texto) != 0) { // enquanto for diferente de 0 ele vai andar pela ArvoreAVL
+                if (texto.compareTo(x.lista.primeiro.texto) >= 0) {
+                    x = x.direito;
                 } else if (texto.compareTo(x.lista.primeiro.texto) < 0) {
-                    x = x.esquerda;
+                    x = x.esquerdo;
                 }
             }
 
@@ -78,20 +86,25 @@ class App {
 
             int y;
             for(y = 0; no != null; no = no.proximo) {
-                System.out.println("Nome do Arquivo: '" + no.nomeArquivo + "' || Frequência: " + no.freq);
-                y += no.freq;
+                System.out.println("Nome do Arquivo: '" + no.nomeArquivo + "' || Frequencia: " + no.frequencia);
+                y += no.frequencia;
             }
 
-            System.out.println("Frequência total = " + y);
+            System.out.println("Frequencia total = " + y);
         }
 
     }
 
     public static void main(String[] args) throws FileNotFoundException{
         App cp = new App();
-        ArvoreAVL a = cp.teste(new File("C:\\Users\\lukas\\IdeaProjects\\ArvoreAVLProjetoColaborativo\\txt`s"));
-        a.imprime_preOrdem(a.raiz);
-        System.out.println(a.altura(a, a.raiz.esquerda));
-        System.out.println(a.altura(a, a.raiz.direita));
+        ArvoreAVL n = cp.teste(new File("C:\\Users\\lukas\\IdeaProjects\\ArvoreAVL\\txt"));
+        n.remove_elemento (n ,"zeus");
+        n.insere_elemento(n, "rapaz", 5, "livro.txt");
+        n.imprime_inordem(n.raiz);
+        n.existe_elemento(n, "luffy");
+        n.existe_elemento(n, "caminhao");
+
+        System.out.println("Tamanho da arvore do lado esquerdo: " + n.altura(n, n.raiz.esquerdo)); //talvez é a quantidade de nos no lado esquerdo
+        System.out.println("Tamanho da arvore do lado direito: " + n.altura(n, n.raiz.direito)); //talvez é a quantidade de nos no lado direito
     }
 }

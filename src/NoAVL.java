@@ -1,11 +1,12 @@
-    public class NoAVL{
+
+public class NoAVL{
     public LSE lista;
-    public NoAVL esquerda;
-    public NoAVL direita;
+    public NoAVL esquerdo;
+    public NoAVL direito;
 
     public NoAVL() {
         this.lista = new LSE();
-        this.esquerda = null;
-        this.direita = null;
+        this.esquerdo = null;
+        this.direito = null;
     }
 }
