@@ -5,8 +5,19 @@ public class App {
         NoAVL no1 = new NoAVL("Lukas");
         ArvoreAVL arvore = new ArvoreAVL(no1);
 
-        arvore.insere_elemento("Pedro");
-        arvore.insere_elemento("Vitor");
+        System.out.println(arvore.raiz.texto);
 
+        arvore.insere_elemento("Júlia");
+        System.out.println(arvore.raiz.esquerdo.texto);
+        arvore.insere_elemento("Pedro");
+        System.out.println(arvore.raiz.direito.texto);
+        arvore.insere_elemento("Vitor");
+        System.out.println(arvore.raiz.direito.texto);
+        
+        arvore.imprime_inOrdem(no1);
+
+        //arvore.existeElemento(no1, "Pedro");
+        //arvore.remove_elemento("Pedro");
+        
     }
 }

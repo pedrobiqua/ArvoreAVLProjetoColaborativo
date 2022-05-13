@@ -43,7 +43,7 @@ public class ArvoreAVL {
         while(atual != null){
             if (atual.texto == texto) {
                 break;
-            } else if (atual.texto.compareTo(texto) <= -1){  //atual.texto < texto
+            } else if (atual.texto.compareTo(texto) >= 0){  //atual.texto < texto
                 paiAtual = atual;
                 atual = atual.esquerdo;
             } else {
@@ -113,8 +113,25 @@ public class ArvoreAVL {
         }
     }
 
-    public void existe_elemento( String texto ){//Falta fazer
+    public boolean existeElemento(NoAVL elemento,String texto){
+        NoAVL no = elemento;
 
+        while(no!=null && texto != no.texto) {
+            if(texto.compareTo(raiz.texto)<=0) {
+                no = no.esquerdo;
+            }
+            else {
+                no = no.direito;
+            }
+        }
+        if(no!=null && texto == no.texto) {
+            System.out.println("Palavra existe!");
+            return true;
+        }else
+        {
+            System.out.println("Palavra não existe!");
+            return false;
+        }
     }
 
     public void imprime_preOrdem( NoAVL no ){
