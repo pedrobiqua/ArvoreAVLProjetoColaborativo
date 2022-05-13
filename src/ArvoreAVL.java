@@ -15,12 +15,13 @@ public class ArvoreAVL {
         } else {
             NoAVL q = null;
             while (p != null) {
-                q = p;
                 if (texto.compareTo(raiz.texto) >= 0) {
+                    q = p;
                     p = p.direito; 
                     System.out.println("Direitaaa");
                     
                 } else {
+                    q = p;
                     p = p.esquerdo;
                     System.out.println("Esquerdaaaa");
                 }
