@@ -1,173 +1,200 @@
 public class ArvoreAVL {
     NoAVL raiz;
 
-    public ArvoreAVL(NoAVL raiz) {//Falta fazer
-        this.raiz = raiz;
+    public ArvoreAVL() {
+        this.raiz = null;
     }
-    
-    public void insere_elemento( String texto ){//Falta fazer
-        NoAVL novo = new NoAVL(texto);
-        NoAVL p = this.raiz;
 
-        if(verefica_ArvoreVazia()){
-            this.raiz = novo;
-            System.out.println("Criei a raiz");
-        } else {
+    public void insere_elemento(ArvoreAVL p, String texto, int freq, String nomeArquivo) {
+        if(p.raiz.lista.primeiro == null) {
+            p.raiz = new NoAVL();
+            p.raiz.lista.insereOrdenado(texto, freq, nomeArquivo);
+        }
+        else {
+            NoAVL no = p.raiz;
             NoAVL q = null;
+            while(no != null) {
+                if(texto.compareTo(no.lista.primeiro.texto) > 0) {
+                    q = no;
+                    no = no.direita;
+                } else if(texto.compareTo(no.lista.primeiro.texto) < 0) {
+                    q = no;
+                    no = no.esquerda;
+                } else {
+                    break;
+                }
+            }
+            if (no == null) {
+                no = new NoAVL();
+            }
+            no.lista.insereOrdenado(texto, freq, nomeArquivo);
+            if(no.lista.primeiro.texto.compareTo(q.lista.primeiro.texto) >= 0) {
+                q.direita = no;
+            }
+            else if(no.lista.primeiro.texto.compareTo(q.lista.primeiro.texto) < 0) {
+                q.esquerda = no;
+            }
+        }
+    }
+
+    public boolean remove_elemento(ArvoreAVL l, String texto) {
+        NoAVL p = l.raiz;
+        NoAVL q = null;
+        if (p == null) {
+            return false;
+        } else {
             while (p != null) {
+                if (texto.compareTo(p.lista.primeiro.texto) == 0) {
+                    if(q.esquerda == p) {
+                        if(p.esquerda == null && p.direita == null) {
+                            q.esquerda = null;
+                        }else if(p.direita != null) {
+                            NoAVL x = menor(p.direita);
+                            remove_elemento(l,x.lista.primeiro.texto);
+                            x.direita = p.direita;
+                            x.esquerda = p.esquerda;
+                            q.esquerda = x;
+                        }else if(p.esquerda != null) {
+                            NoAVL x = maior(p.esquerda);
+                            remove_elemento(l,x.lista.primeiro.texto);
+                            x.direita = p.direita;
+                            x.esquerda = p.esquerda;
+                            q.esquerda = x;
+                        }
+                    }else if(q.direita == p) {
+                        if(p.esquerda == null && p.direita == null) {
+                            q.direita = null;
+                        }else if(p.direita != null) {
+                            NoAVL x = menor(p.direita);
+                            remove_elemento(l,x.lista.primeiro.texto);
+                            x.direita = p.direita;
+                            x.esquerda = p.esquerda;
+                            q.direita = x;
+                        }else if(p.esquerda != null) {
+                            NoAVL x = maior(p.esquerda);
+                            remove_elemento(l,x.lista.primeiro.texto);
+                            x.direita = p.direita;
+                            x.esquerda = p.esquerda;
+                            q.direita = x;
+                        }
+                    } else if(p == l.raiz) {
+                        if(p.esquerda == null && p.direita == null) {
+                            p = null;
+                        }else if(p.direita != null) {
+                            NoAVL x = menor(p.direita);
+                            remove_elemento(l,x.lista.primeiro.texto);
+                            x.direita = p.direita;
+                            x.esquerda = p.esquerda;
+                        }else if(p.esquerda != null) {
+                            NoAVL x = maior(p.esquerda);
+                            remove_elemento(l,x.lista.primeiro.texto);
+                            x.direita = p.direita;
+                            x.esquerda = p.esquerda;
+                        }
+                    }
+                    return true;
+                }
                 q = p;
-                if (texto.compareTo(raiz.texto) >= 0) {
-                    p = p.direito; 
-                    System.out.println("Direitaaa");
-                    
-                } else {
-                    p = p.esquerdo;
-                    System.out.println("Esquerdaaaa");
+                if(texto.compareTo(p.lista.primeiro.texto) > 0) {
+                    p = p.direita;
+                } else if(texto.compareTo(p.lista.primeiro.texto) < 0) {
+                    p = p.esquerda;
                 }
             }
-            if (q.texto.compareTo(texto) <= 0) {
-                q.direito = novo;
-                raiz.direito = q.direito;
-                System.out.println("Direitaaa");
-            } else {
-                q.esquerdo = novo;
-                raiz.esquerdo = q.esquerdo;
-                System.out.println("Esquerdaaa");
-            }
-        }
-    }
-    // A jeitar e terminar amanhã/ coverter para string/ testar
-    public void remove_elemento(String texto){
-        NoAVL atual = this.raiz;
-        NoAVL paiAtual = null;
-        while(atual != null){
-            if (atual.texto == texto) {
-                break;
-            } else if (atual.texto.compareTo(texto) <= -1){  //atual.texto < texto
-                paiAtual = atual;
-                atual = atual.esquerdo;
-            } else {
-                paiAtual = atual;
-                atual = atual.direito;
-            }
-        }
-
-        if (atual != null) {
-            if (atual.direito != null) {
-                NoAVL substituto = atual.direito;
-                NoAVL paiSubstituto = null;
-                while(substituto.esquerdo != null){
-                    paiSubstituto = substituto;
-                    substituto = substituto.esquerdo;
-                }
-                substituto = atual.esquerdo;
-                if (paiAtual != null){
-                    if (substituto.texto.compareTo(paiSubstituto.texto) >= 0) { //substituto.texto > paiSubstituto.texto
-                        paiSubstituto.direito = substituto;
-                    } else {
-                        paiSubstituto.esquerdo = substituto;
-                    }
-                } else {
-                    this.raiz = substituto;
-                }
-                if (substituto.texto.compareTo(paiSubstituto.texto) >=0) { // substituto.valor > paiSubstituto.valor
-                    paiAtual.esquerdo = null;
-                } else {
-                    paiAtual.direito = null;
-                }
-                
-            } else if (atual.esquerdo != null) {
-                NoAVL substituto = atual.esquerdo;
-                NoAVL paiSubstituto = null;
-                while(substituto.direito != null){
-                    paiSubstituto = substituto;
-                    substituto = substituto.direito;
-                }
-                if (paiAtual != null){
-                    if (substituto.texto.compareTo(paiSubstituto.texto) >= 0 ) { // substituto.valor > paiSubstituto.valor
-                        paiSubstituto.direito = substituto;
-                    } else {
-                        paiSubstituto.esquerdo = substituto;
-                    }
-                } else {
-                    this.raiz = substituto;
-                }
-
-                if (substituto.texto.compareTo(paiSubstituto.texto) >= 0) { //substituto.valor > paiSubstituto.valor
-                    paiAtual.esquerdo = null;
-                } else {
-                    paiAtual.direito = null;
-                }
-
-            } else {
-                if (paiAtual != null){
-                    if (atual.texto.compareTo(paiAtual.texto) >= 0) { //atual.valor > paiAtual.valor
-                        paiAtual.direito = null;
-                    } else {
-                        paiAtual.esquerdo = null;
-                    }
-                }else{
-                    this.raiz = null; 
-                }
-            }
+            return false;
         }
     }
 
-    public void existe_elemento(NoAVL no, String texto ){//Falta fazer
-
+    public boolean existe_elemento(String texto) {
+        NoAVL p = raiz;
+        if (raiz == null) {
+            return false;
+        }
+        else {
+            while (p != null) {
+                if (texto.compareTo(p.lista.primeiro.texto) == 0) {
+                    return true;
+                }
+                else if (texto.compareTo(p.lista.primeiro.texto) < 0) {
+                    p = p.esquerda;
+                }
+                else {
+                    p = p.direita;
+                }
+            }
+            return false;
+        }
     }
+
+
 
     public void imprime_preOrdem( NoAVL no ){
         if ( no != null ) {
-            System.out.print(no.texto + " ");
-            imprime_preOrdem(no.esquerdo);
-            imprime_preOrdem(no.direito);
+            no.lista.imprime();
+            System.out.println("");
+            imprime_preOrdem(no.esquerda);
+            imprime_preOrdem(no.direita);
         }
     }
 
     public void imprime_inOrdem( NoAVL no ){
         if( no != null ){
-            imprime_inOrdem(no.esquerdo);
-            System.out.print(no.texto + " ");
-            imprime_inOrdem(no.direito);
+            imprime_inOrdem(no.esquerda);
+            no.lista.imprime();
+            System.out.println("");
+            imprime_inOrdem(no.direita);
         }
     }
 
     public void imprime_posOrdem( NoAVL no ){
         if( no != null ){
-            imprime_posOrdem(no.esquerdo);
-            imprime_posOrdem(no.direito);
-            System.out.print(no.texto + " ");
+            imprime_posOrdem(no.esquerda);
+            imprime_posOrdem(no.direita);
+            no.lista.imprime();
+            System.out.println("");
         }
+    }
+
+
+    public NoAVL maior(NoAVL no) {
+        if (no == null) {
+            return null;
+        }
+        NoAVL n = no;
+        while (n.direita != null) {
+            n = n.direita;
+        }
+        return n;
+    }
+
+    public NoAVL menor(NoAVL no) {
+        if (no == null) {
+            return null;
+        }
+        NoAVL n = no;
+        while (n.esquerda != null) {
+            n = n.esquerda;
+        }
+        return n;
     }
 
     public int altura( NoAVL no ){//Falta fazer
-        
+
         return -1;//Temporário
     }
 
-    private Boolean verefica_ArvoreVazia(){
-        return raiz == null;
-    }
-
-    public boolean existeElemento(NoAVL elemento,String texto){
-        NoAVL no = elemento;
-
-        while(no!=null && texto != no.texto) {
-            if(texto.compareTo(raiz.texto)<=0) {
-                no = no.esquerdo;
-            }
-            else {
-                no = no.direito;
+    public int altura (ArvoreAVL a,NoAVL n) {
+        int altura_esquerda = -1;
+        int altura_direita = -1;
+        if (n == null) {
+            return -1;
+        }else {
+            altura_esquerda = altura(a,n.esquerda);
+            altura_direita = altura(a,n.direita);
+            if (altura_esquerda < altura_direita) {
+                return altura_direita + 1;
             }
         }
-        if(no!=null && texto == no.texto) {
-            System.out.println("Palavra existe!");
-            return true;
-        }else
-        {
-            System.out.println("Palavra não existe!");
-            return false;
-        }
+        return altura_esquerda + 1;
     }
 }

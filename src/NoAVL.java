@@ -1,17 +1,11 @@
-public class NoAVL {
-    public NoAVL direito;
-    public NoAVL esquerdo;
-    public int altura;
+    public class NoAVL{
+    public LSE lista;
+    public NoAVL esquerda;
+    public NoAVL direita;
 
-    public int valor;
-    public String texto;
-
-    public NoAVL(String texto) {
-        this.altura = -1;
-        this.texto = texto;
-
-        this.esquerdo = null;
-        this.direito = null;
+    public NoAVL() {
+        this.lista = new LSE();
+        this.esquerda = null;
+        this.direita = null;
     }
-
 }
