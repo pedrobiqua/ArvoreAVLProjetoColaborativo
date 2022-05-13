@@ -8,5 +8,7 @@ public class App {
         arvore.insere_elemento("Pedro");
         arvore.insere_elemento("Vitor");
 
+
+
     }
 }

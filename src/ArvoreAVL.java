@@ -147,7 +147,27 @@ public class ArvoreAVL {
     }
 
     private Boolean verefica_ArvoreVazia(){
-        return raiz == null ? true : false;
+        return raiz == null;
+    }
 
+    public boolean existeElemento(NoAVL elemento,String texto){
+        NoAVL no = elemento;
+
+        while(no!=null && texto != no.texto) {
+            if(texto.compareTo(raiz.texto)<=0) {
+                no = no.esquerdo;
+            }
+            else {
+                no = no.direito;
+            }
+        }
+        if(no!=null && texto == no.texto) {
+            System.out.println("Palavra existe!");
+            return true;
+        }else
+        {
+            System.out.println("Palavra não existe!");
+            return false;
+        }
     }
 }
