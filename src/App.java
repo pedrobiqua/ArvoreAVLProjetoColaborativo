@@ -50,7 +50,7 @@ public class App {
         return a; // retorna a ArvoreAVL
     }
 
-    public boolean verifica(NoAVL no, String texto) throws FileNotFoundException{ // verificar se existe uma texto em uma ArvoreAVL (recursivo)
+    public static boolean verifica(NoAVL no, String texto) throws FileNotFoundException{ // verificar se existe uma texto em uma ArvoreAVL (recursivo)
         if (no == null || no.lista.primeiro == null) {
             return false;
         }
@@ -66,12 +66,12 @@ public class App {
         return false;
     }
 
-    public void pesquisa(ArvoreAVL n, String texto) throws FileNotFoundException {
-        if (!this.verifica(n.raiz, texto)) { // verificar se a palavre que esta sendo pesquisada existe na ArvoreAVL
+    public static void pesquisa(ArvoreAVL a, String texto) throws FileNotFoundException {
+        if (!verifica(a.raiz, texto)) { // verificar se a palavre que esta sendo pesquisada existe na ArvoreAVL
             System.out.println("Essa texto não foi encontrada.");
         }
         else {
-            NoAVL x = n.raiz; // passar a raiz
+            NoAVL x = a.raiz; // passar a raiz
 
             while(texto.compareTo(x.lista.primeiro.texto) != 0) { // enquanto for diferente de 0 ele vai andar pela ArvoreAVL
                 if (texto.compareTo(x.lista.primeiro.texto) >= 0) {
@@ -90,22 +90,33 @@ public class App {
                 y += no.frequencia;
             }
 
-            System.out.println("Frequencia total = " + y);
+            System.out.println("Frequencia total = " + y +  " do texto " + texto);
         }
 
     }
 
     public static void main(String[] args) throws FileNotFoundException{
         App cp = new App();
-        ArvoreAVL n = cp.teste(new File("C:\\Users\\lukas\\IdeaProjects\\ArvoreAVL\\txt"));
-        n.remove_elemento (n ,"thiagoamanda");
-        n.insere_elemento(n, "rapaz", 5, "livro.txt");
-        n.imprime_inordem(n.raiz);
-        n.existe_elemento(n, "luffy");
-        n.existe_elemento(n, "caminhao");
-
-        System.out.println("Tamanho da arvore do lado esquerdo: " + n.altura(n, n.raiz.esquerdo)); //talvez é a quantidade de nos no lado esquerdo
-        System.out.println("Tamanho da arvore do lado direito: " + n.altura(n, n.raiz.direito)); //talvez é a quantidade de nos no lado direito
+        ArvoreAVL a = cp.teste(new File("C:\\Users\\lukas\\IdeaProjects\\ArvoreAVL\\txt"));
+        System.out.println("------------------------------------------------------------");
+        a.insere_elemento(a, "rapaz", 5, "livro.txt");
+        System.out.println("Insere em IN ORDEM");
+        a.imprime_inOrdem(a.raiz);
+        System.out.println("------------------------------------------------------------");
+        System.out.println("Insere em POS ORDEM");
+        a.imprime_posOrdem(a.raiz);
+        System.out.println("------------------------------------------------------------");
+        System.out.println("Insere em PRE ORDEM");
+        a.remove_elemento (a ,"zeus");
+        a.imprime_preOrdem(a.raiz);
+        System.out.println("------------------------------------------------------------");
+        System.out.println("Tamanho da arvore do lado esquerdo: " + a.altura(a, a.raiz.esquerdo)); //talvez é a quantidade de nos no lado esquerdo
+        System.out.println("Tamanho da arvore do lado direito: " + a.altura(a, a.raiz.direito)); //talvez é a quantidade de nos no lado direito
+        System.out.println("------------------------------------------------------------");
+        a.existe_elemento(a, "luffy");
+        a.existe_elemento(a, "caminhao");
+        System.out.println("------------------------------------------------------------");
+        pesquisa(a, "computador");
+        System.out.println("------------------------------------------------------------");
     }
 }
-// Verificar pq o tamanho nos arquivos txt`s estão bugando na hora de ler quando passa de uma certa quantia.

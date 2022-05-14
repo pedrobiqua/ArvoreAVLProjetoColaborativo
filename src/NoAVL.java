@@ -1,4 +1,3 @@
-
 public class NoAVL{
     public LSE lista;
     public NoAVL esquerdo;

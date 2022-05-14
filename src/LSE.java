@@ -35,7 +35,7 @@ public class LSE {
     }
 
     public void insereOrdenado(String texto, int frequencia, String nomeArquivo) {
-        if(vazio() || frequencia <= primeiro.frequencia) { // se a frequencia é menor que a frequencia na primeiro texto
+        if(vazio() || frequencia <= primeiro.frequencia) { // se a frequencia eh menor que a frequencia no primeiro texto
             inserePrimeiro(texto, frequencia, nomeArquivo);
         }
         else if(frequencia >= ultimo.frequencia) {
@@ -61,7 +61,7 @@ public class LSE {
         No no = primeiro;
         System.out.println("texto:"+primeiro.texto);
         while (no != null) {
-            System.out.println("Nome do Arquivo: '"+no.nomeArquivo+"' || frequencia: "+no.frequencia);
+            System.out.println("Nome do Arquivo: '"+no.nomeArquivo+"' || Frequencia: "+no.frequencia);
             no = no.proximo;
         }
         return true;
