@@ -1,4 +1,4 @@
-public class NoAVL{
+public class NoAVL{ //No da arvore
     public LSE lista;
     public NoAVL esquerdo;
     public NoAVL direito;

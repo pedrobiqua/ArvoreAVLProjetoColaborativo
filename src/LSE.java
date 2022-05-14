@@ -1,4 +1,4 @@
-public class LSE {
+public class LSE implements ILSE{ //Utilizamos interface para organizar os metodos.
     public No primeiro;
     public No ultimo;
 

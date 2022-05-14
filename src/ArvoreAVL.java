@@ -1,4 +1,4 @@
-public class ArvoreAVL {
+public class ArvoreAVL implements IArvoreAVL { //Utilizamos interface para organizar os metodos.
     public NoAVL raiz;
 
     public ArvoreAVL() {
