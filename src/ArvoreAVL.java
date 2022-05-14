@@ -213,7 +213,7 @@ public class ArvoreAVL {
         return altura_esquerdo + 1;
     }
 
-    public void rot_esquerdo(ArvoreAVL a, NoAVL no) {
+    public void rotacao_esquerdo(ArvoreAVL a, NoAVL no) {
         NoAVL p = a.raiz;
         NoAVL q = null;
 
@@ -268,7 +268,7 @@ public class ArvoreAVL {
         }
     }
 
-    public void rot_direito(ArvoreAVL a, NoAVL no) {
+    public void rotacao_direito(ArvoreAVL a, NoAVL no) {
         NoAVL p = a.raiz;
         NoAVL q = null;
 
@@ -325,10 +325,10 @@ public class ArvoreAVL {
 
     public void balanceamento(ArvoreAVL a, NoAVL no) {
         if((a.altura(a, no.esquerdo) - a.altura(a, no.direito)) < -1) {
-            a.rot_esquerdo(a, no);
+            a.rotacao_esquerdo(a, no);
         }
         else if((a.altura(a, no.esquerdo) - a.altura(a, no.direito)) > 1) {
-            a.rot_direito(a, no);
+            a.rotacao_direito(a, no);
         }
     }
 }

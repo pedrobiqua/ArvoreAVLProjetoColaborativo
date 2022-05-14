@@ -61,7 +61,7 @@ public class LSE {
         No no = primeiro;
         System.out.println("texto:"+primeiro.texto);
         while (no != null) {
-            System.out.println("Nome do Arquivo: '"+no.nomeArquivo+"' || Frequencia: "+no.frequencia);
+            System.out.println("Nome do Arquivo: '"+no.nomeArquivo+"' e a Frequencia: "+no.frequencia);
             no = no.proximo;
         }
         return true;

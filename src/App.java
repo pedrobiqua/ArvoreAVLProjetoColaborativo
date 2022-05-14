@@ -86,7 +86,7 @@ public class App {
 
             int y;
             for(y = 0; no != null; no = no.proximo) {
-                System.out.println("Nome do Arquivo: '" + no.nomeArquivo + "' || Frequencia: " + no.frequencia);
+                System.out.println("Nome do Arquivo: " + no.nomeArquivo + "' e a Frequencia: " + no.frequencia);
                 y += no.frequencia;
             }
 
@@ -97,7 +97,7 @@ public class App {
 
     public static void main(String[] args) throws FileNotFoundException{
         App cp = new App();
-        ArvoreAVL a = cp.teste(new File("C:\\Users\\lukas\\IdeaProjects\\ArvoreAVL\\txt"));
+        ArvoreAVL a = cp.teste(new File("C:\\Users\\lukas\\IdeaProjects\\ArvoreAVLProjetoColaborativo\\txt"));
         System.out.println("------------------------------------------------------------");
         a.insere_elemento(a, "rapaz", 5, "livro.txt");
         System.out.println("Insere em IN ORDEM");
