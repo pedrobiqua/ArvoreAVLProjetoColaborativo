@@ -21,3 +21,8 @@ public class App {
         
     }
 }
+/* Anotações:
+Da para criar um arquivo com a interface para manter o padrão dos outos trabalhos
+Jogar as funções q o Lukas fez no app em um outro arquivo sendo estatico;
+Na leitura do arquivo da para selecionar a pasta do projeto ao inves do caminho, pois isso varia de pc pra pc.
+ */
