@@ -98,7 +98,7 @@ public class App {
     public static void main(String[] args) throws FileNotFoundException{
         App cp = new App();
         ArvoreAVL n = cp.teste(new File("C:\\Users\\lukas\\IdeaProjects\\ArvoreAVL\\txt"));
-        n.remove_elemento (n ,"zeus");
+        n.remove_elemento (n ,"thiagoamanda");
         n.insere_elemento(n, "rapaz", 5, "livro.txt");
         n.imprime_inordem(n.raiz);
         n.existe_elemento(n, "luffy");
@@ -108,3 +108,4 @@ public class App {
         System.out.println("Tamanho da arvore do lado direito: " + n.altura(n, n.raiz.direito)); //talvez é a quantidade de nos no lado direito
     }
 }
+// Verificar pq o tamanho nos arquivos txt`s estão bugando na hora de ler quando passa de uma certa quantia.

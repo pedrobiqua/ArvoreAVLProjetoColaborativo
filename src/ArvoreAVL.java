@@ -253,7 +253,7 @@ public class ArvoreAVL {
 
         while (p != no) {
             q = p;
-            if(no.lista.primeiro.texto.compareTo(p.lista.primeiro.texto) > 0) {
+            if(no.lista.primeiro.texto.compareTo(p.lista.primeiro.texto) >= 0) {
                 p = p.direito;
             }else if(no.lista.primeiro.texto.compareTo(p.lista.primeiro.texto) < 0) {
                 p = p.esquerdo;
