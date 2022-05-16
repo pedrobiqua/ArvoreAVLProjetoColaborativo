@@ -6,11 +6,16 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) throws FileNotFoundException{
+        //Para não poluir o codigo resolvemos criar uma classe para as funcionalidades extras
         var cp = new FuncoesApp();
+
+        //Obtem o path da pasta onde esta os txts
         Path path = Paths.get("");
         String nomeDir = path.toAbsolutePath().normalize().toString();
         System.out.println(nomeDir + "\\txt\\");
-        ArvoreAVL a = cp.teste(new File(nomeDir + "\\txt\\"));
+
+        //Instancia da arvore e inicializando com os valores dos txts
+        ArvoreAVL arvoreAVL = cp.inicializarArvore(new File(nomeDir + "\\txt\\"));
         boolean running = true;
 
         while (running) {
@@ -25,57 +30,63 @@ public class App {
             int opcao = menu.nextInt();
 
             switch (opcao) {
-                case 1 -> {
+                case 1:
                     System.out.println("------------------------------------------------------------");
-                    a.insere_elemento(a, "rapaz", 5, "livro.txt");
+                    arvoreAVL.insere_elemento(arvoreAVL, "rapaz", 5, "livro.txt");
                     System.out.println("Insere em IN ORDEM");
-                    a.imprime_inOrdem(a.raiz);
+                    arvoreAVL.imprime_inOrdem(arvoreAVL.raiz);
                     System.out.println("------------------------------------------------------------");
-                    System.out.println("Tamanho da arvore do lado esquerdo: " + a.altura(a, a.raiz.esquerdo)); //talvez é a quantidade de nos no lado esquerdo
-                    System.out.println("Tamanho da arvore do lado direito: " + a.altura(a, a.raiz.direito)); //talvez é a quantidade de nos no lado direito
+                    System.out.println("Tamanho da arvore do lado esquerdo: " + arvoreAVL.altura(arvoreAVL, arvoreAVL.raiz.esquerdo)); //talvez é a quantidade de nos no lado esquerdo
+                    System.out.println("Tamanho da arvore do lado direito: " + arvoreAVL.altura(arvoreAVL, arvoreAVL.raiz.direito)); //talvez é a quantidade de nos no lado direito
                     System.out.println("------------------------------------------------------------");
-                    a.existe_elemento(a, "luffy");
-                    a.existe_elemento(a, "caminhao");
+                    arvoreAVL.existe_elemento(arvoreAVL, "luffy");
+                    arvoreAVL.existe_elemento(arvoreAVL, "caminhao");
                     System.out.println("------------------------------------------------------------");
-                    FuncoesApp.pesquisa(a, "computador");
+                    cp.pesquisa(arvoreAVL, "computador");
                     System.out.println("------------------------------------------------------------");
-                }
-                case 2 -> {
+                    break;
+                
+                case 2:
                     System.out.println("------------------------------------------------------------");
                     System.out.println("Insere em POS ORDEM");
-                    a.imprime_posOrdem(a.raiz);
+                    arvoreAVL.imprime_posOrdem(arvoreAVL.raiz);
                     System.out.println("------------------------------------------------------------");
-                    System.out.println("Tamanho da arvore do lado esquerdo: " + a.altura(a, a.raiz.esquerdo)); //talvez é a quantidade de nos no lado esquerdo
-                    System.out.println("Tamanho da arvore do lado direito: " + a.altura(a, a.raiz.direito)); //talvez é a quantidade de nos no lado direito
+                    System.out.println("Tamanho da arvore do lado esquerdo: " + arvoreAVL.altura(arvoreAVL, arvoreAVL.raiz.esquerdo)); //talvez é a quantidade de nos no lado esquerdo
+                    System.out.println("Tamanho da arvore do lado direito: " + arvoreAVL.altura(arvoreAVL, arvoreAVL.raiz.direito)); //talvez é a quantidade de nos no lado direito
                     System.out.println("------------------------------------------------------------");
-                    a.existe_elemento(a, "luffy");
-                    a.existe_elemento(a, "caminhao");
+                    arvoreAVL.existe_elemento(arvoreAVL, "luffy");
+                    arvoreAVL.existe_elemento(arvoreAVL, "caminhao");
                     System.out.println("------------------------------------------------------------");
-                    FuncoesApp.pesquisa(a, "computador");
+                    cp.pesquisa(arvoreAVL, "computador");
                     System.out.println("------------------------------------------------------------");
-                }
-                case 3 -> {
+                    break;
+                
+                case 3: 
                     System.out.println("------------------------------------------------------------");
-                    a.remove_elemento(a, "zeus");
+                    arvoreAVL.remove_elemento(arvoreAVL, "zeus");
                     System.out.println("Insere em PRE ORDEM");
-                    a.imprime_preOrdem(a.raiz);
+                    arvoreAVL.imprime_preOrdem(arvoreAVL.raiz);
                     System.out.println("------------------------------------------------------------");
-                    System.out.println("Tamanho da arvore do lado esquerdo: " + a.altura(a, a.raiz.esquerdo)); //talvez é a quantidade de nos no lado esquerdo
-                    System.out.println("Tamanho da arvore do lado direito: " + a.altura(a, a.raiz.direito)); //talvez é a quantidade de nos no lado direito
+                    System.out.println("Tamanho da arvore do lado esquerdo: " + arvoreAVL.altura(arvoreAVL, arvoreAVL.raiz.esquerdo)); //talvez é a quantidade de nos no lado esquerdo
+                    System.out.println("Tamanho da arvore do lado direito: " + arvoreAVL.altura(arvoreAVL, arvoreAVL.raiz.direito)); //talvez é a quantidade de nos no lado direito
                     System.out.println("------------------------------------------------------------");
-                    a.existe_elemento(a, "luffy");
-                    a.existe_elemento(a, "caminhao");
+                    arvoreAVL.existe_elemento(arvoreAVL, "luffy");
+                    arvoreAVL.existe_elemento(arvoreAVL, "caminhao");
                     System.out.println("------------------------------------------------------------");
-                    FuncoesApp.pesquisa(a, "computador");
+                    cp.pesquisa(arvoreAVL, "computador");
                     System.out.println("------------------------------------------------------------");
-                }
-                case 4 -> {
+                    break;
+                
+                case 4:
                     System.out.println("Saindo do projeto. . . ");
                     menu.close();
                     running = false;
-                }
-                default -> System.out.println("\nNao existe essa opcao de escolha.");
+                    break;
+                
+                default:
+                     System.out.println("\nNao existe essa opcao de escolha.");
             }
+            
         }
     }
 }

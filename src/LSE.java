@@ -1,7 +1,10 @@
-public class LSE implements ILSE{ //Utilizamos interface para organizar os metodos.
+//Utilizamos interface para organizar os metodos.
+public class LSE implements ILSE{ 
     public No primeiro;
     public No ultimo;
 
+    //Utilizamos a lista simplismente encadeada implementada em outros trabalhos
+    //Fizemos melhorias e corrigimos alguns erros
     public LSE() {
         this.primeiro = null;
         this.ultimo = null;
@@ -11,6 +14,12 @@ public class LSE implements ILSE{ //Utilizamos interface para organizar os metod
         return(this.primeiro == null);
     }
 
+    /**
+     * Insere dado apartir da primeira posição da fila
+     * @param texto Texto a ser inserido na Lista
+     * @param frequencia Frequencia q ocorre.
+     * @param nomeArquivo Nome do arquivo txt analisado.
+     */
     public void inserePrimeiro(String texto, int frequencia, String nomeArquivo) {
         No p = new No(texto,frequencia,nomeArquivo);
         if(vazio()) {
@@ -23,6 +32,12 @@ public class LSE implements ILSE{ //Utilizamos interface para organizar os metod
         }
     }
 
+    /**
+     * Insere dado apartir da ultima posição da fila
+     * @param texto Texto a ser inserido na Lista
+     * @param frequencia Frequencia q ocorre.
+     * @param nomeArquivo Nome do arquivo txt analisado.
+     */
     public void insereUltimo(String texto, int frequencia, String nomeArquivo) {
         if(vazio()) {
             inserePrimeiro(texto, frequencia, nomeArquivo);
@@ -34,6 +49,13 @@ public class LSE implements ILSE{ //Utilizamos interface para organizar os metod
         }
     }
 
+
+    /**
+     * Insere dados na lista de forma ordenada
+     * @param texto Texto a ser inserido na Lista
+     * @param frequencia Frequencia q ocorre.
+     * @param nomeArquivo Nome do arquivo txt analisado.
+     */
     public void insereOrdenado(String texto, int frequencia, String nomeArquivo) {
         if(vazio() || frequencia <= primeiro.frequencia) { // se a frequencia eh menor que a frequencia no primeiro texto
             inserePrimeiro(texto, frequencia, nomeArquivo);
@@ -54,14 +76,18 @@ public class LSE implements ILSE{ //Utilizamos interface para organizar os metod
         }
     }
 
+    /**
+     * Imprime dados da LSE
+     */
     public boolean imprime() {
         if (vazio()) {
             return false;
         }
         No no = primeiro;
-        System.out.println("texto:"+primeiro.texto);
+        System.out.println("texto: "+ primeiro.texto);
         while (no != null) {
-            System.out.println("Nome do Arquivo: '"+no.nomeArquivo+"' e a Frequencia: "+no.frequencia);
+            System.out.print("Nome do Arquivo: '" + no.nomeArquivo);
+            System.out.println(" e a Frequencia " + no.frequencia);
             no = no.proximo;
         }
         return true;

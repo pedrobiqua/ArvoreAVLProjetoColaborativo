@@ -1,4 +1,5 @@
-public interface IArvoreAVL { //Implementação dos metodos necessaios da atividade.
+//Implementação dos metodos necessaios da atividade.
+public interface IArvoreAVL { 
     public void insere_elemento(ArvoreAVL a, String texto, int frequencia, String nomeArquivo);
     public boolean remove_elemento(ArvoreAVL a, String texto);
     public boolean existe_elemento(ArvoreAVL a,String texto);

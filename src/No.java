@@ -1,3 +1,4 @@
+// No utilizado para a LSE.
 public class No {
     public String texto;
     public String nomeArquivo;
