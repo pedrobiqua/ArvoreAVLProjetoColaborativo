@@ -152,7 +152,7 @@ public class ArvoreAVL implements IArvoreAVL {
     public void imprime_preOrdem(NoAVL no) {
         if (no != null) {
             no.lista.imprime();
-            System.out.println("");
+            System.out.println();
             imprime_preOrdem(no.esquerdo);
             imprime_preOrdem(no.direito);
         }
@@ -162,7 +162,7 @@ public class ArvoreAVL implements IArvoreAVL {
         if (no != null) {
             imprime_inOrdem(no.esquerdo);
             no.lista.imprime();
-            System.out.println("");
+            System.out.println();
             imprime_inOrdem(no.direito);
         }
     }
@@ -172,7 +172,7 @@ public class ArvoreAVL implements IArvoreAVL {
             imprime_posOrdem(no.esquerdo);
             imprime_posOrdem(no.direito);
             no.lista.imprime();
-            System.out.println("");
+            System.out.println();
         }
     }
 
@@ -180,11 +180,11 @@ public class ArvoreAVL implements IArvoreAVL {
         if (no == null) {
             return null;
         }
-        NoAVL n = no;
-        while (n.direito != null) {
-            n = n.direito;
+        NoAVL p = no;
+        while (p.direito != null) {
+            p = p.direito;
         }
-        return n;
+        return p;
     }
 
     public NoAVL menor(NoAVL no) {

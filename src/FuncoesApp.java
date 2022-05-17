@@ -16,18 +16,18 @@ public class FuncoesApp {
         
         // Criação da arvore
         ArvoreAVL arvoreAVL = new ArvoreAVL(); 
-        arvoreAVL.raiz = new NoAVL(); 
+        arvoreAVL.raiz = new NoAVL();
 
         for(int i = 0; i < listaDeArquivos.length;i++) {
             Scanner scanner = new Scanner(listaDeArquivos[i]);
             var nomeArquivo = listaDeArquivos[i].getName();
 
-            while(scanner.hasNext()) {  
+            while(scanner.hasNext()) {
                 String texto = scanner.next();
                 NoAVL p = arvoreAVL.raiz;
                 if(verifica(arvoreAVL.raiz,texto)) {
                     // precorrer a ArvoreAVL dependendo se der positivo ou negativo
-                    while(p != null) { 
+                    while(p != null) {
                         if(texto.compareTo(p.lista.primeiro.texto) == 0) {
                             break;
                         }
@@ -98,8 +98,8 @@ public class FuncoesApp {
         }
         else {
             NoAVL p = arvoreAVL.raiz; // passar a raiz
-
-            while(texto.compareTo(p.lista.primeiro.texto) != 0) { // enquanto for diferente de 0 ele vai andar pela ArvoreAVL
+            // enquanto for diferente de 0 ele vai andar pela ArvoreAVL
+            while(texto.compareTo(p.lista.primeiro.texto) != 0) {
                 if (texto.compareTo(p.lista.primeiro.texto) >= 0) {
                     p = p.direito;
                 }

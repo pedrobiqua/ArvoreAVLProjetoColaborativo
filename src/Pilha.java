@@ -16,12 +16,12 @@ public class Pilha {
         return (topo == -1);
     }
 
-    public boolean empilhar(NoAVL x) {
+    public boolean empilhar(NoAVL p) {
         if (cheia()) {
             return false;
         }
         topo ++;
-        nos[topo] = x;
+        nos[topo] = p;
         return true;
     }
 

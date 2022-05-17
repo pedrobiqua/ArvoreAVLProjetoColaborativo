@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) throws FileNotFoundException{
         //Para não poluir o codigo resolvemos criar uma classe para as funcionalidades extras
-        var cp = new FuncoesApp();
+        var arquivo = new FuncoesApp();
 
         //Obtem o path da pasta onde esta os txts
         Path path = Paths.get("");
@@ -15,7 +15,7 @@ public class App {
         System.out.println(nomeDir + "\\txt\\");
 
         //Instancia da arvore e inicializando com os valores dos txts
-        ArvoreAVL arvoreAVL = cp.inicializarArvore(new File(nomeDir + "\\txt\\"));
+        ArvoreAVL arvoreAVL = arquivo.inicializarArvore(new File(nomeDir + "\\txt\\"));
         boolean running = true;
 
         while (running) {
@@ -42,7 +42,7 @@ public class App {
                     arvoreAVL.existe_elemento(arvoreAVL, "luffy");
                     arvoreAVL.existe_elemento(arvoreAVL, "caminhao");
                     System.out.println("------------------------------------------------------------");
-                    cp.pesquisa(arvoreAVL, "computador");
+                    arquivo.pesquisa(arvoreAVL, "computador");
                     System.out.println("------------------------------------------------------------");
                     break;
                 
@@ -57,7 +57,7 @@ public class App {
                     arvoreAVL.existe_elemento(arvoreAVL, "luffy");
                     arvoreAVL.existe_elemento(arvoreAVL, "caminhao");
                     System.out.println("------------------------------------------------------------");
-                    cp.pesquisa(arvoreAVL, "computador");
+                    arquivo.pesquisa(arvoreAVL, "computador");
                     System.out.println("------------------------------------------------------------");
                     break;
                 
@@ -73,7 +73,7 @@ public class App {
                     arvoreAVL.existe_elemento(arvoreAVL, "luffy");
                     arvoreAVL.existe_elemento(arvoreAVL, "caminhao");
                     System.out.println("------------------------------------------------------------");
-                    cp.pesquisa(arvoreAVL, "computador");
+                    arquivo.pesquisa(arvoreAVL, "computador");
                     System.out.println("------------------------------------------------------------");
                     break;
                 
