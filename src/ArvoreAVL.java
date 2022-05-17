@@ -12,38 +12,38 @@ public class ArvoreAVL implements IArvoreAVL {
             arvoreAVL.raiz.lista.inserePrimeiro(texto, frequencia, nomeArquivo);
         }
         else {
-            Pilha p = new Pilha(arvoreAVL.altura(arvoreAVL, arvoreAVL.raiz) + 1);
-            NoAVL no = arvoreAVL.raiz;
+            Pilha pilha = new Pilha(arvoreAVL.altura(arvoreAVL, arvoreAVL.raiz) + 1);
+            NoAVL p = arvoreAVL.raiz;
             NoAVL q = null;
-            while(no != null) {
-                if(texto.compareTo(no.lista.primeiro.texto) >= 0) {
-                    q = no;
-                    p.empilhar(no);
-                    no = no.direito;
+            while(p != null) {
+                if(texto.compareTo(p.lista.primeiro.texto) >= 0) {
+                    q = p;
+                    pilha.empilhar(p);
+                    p = p.direito;
                 }
-                else if(texto.compareTo(no.lista.primeiro.texto) < 0) {
-                    q = no;
-                    p.empilhar(no);
-                    no = no.esquerdo;
+                else if(texto.compareTo(p.lista.primeiro.texto) < 0) {
+                    q = p;
+                    pilha.empilhar(p);
+                    p = p.esquerdo;
                 }
                 else {
                     break;
                 }
             }
-            if (no == null) {
-                no = new NoAVL();
+            if (p == null) {
+                p = new NoAVL();
             }
-            no.lista.inserePrimeiro(texto, frequencia, nomeArquivo);
-            if(no.lista.primeiro.texto.compareTo(q.lista.primeiro.texto) >= 0) {
-                q.direito = no;
+            p.lista.inserePrimeiro(texto, frequencia, nomeArquivo);
+            if(p.lista.primeiro.texto.compareTo(q.lista.primeiro.texto) >= 0) {
+                q.direito = p;
             }
-            else if(no.lista.primeiro.texto.compareTo(q.lista.primeiro.texto) < 0) {
-                q.esquerdo = no;
+            else if(p.lista.primeiro.texto.compareTo(q.lista.primeiro.texto) < 0) {
+                q.esquerdo = p;
             }
 
-            while(!p.vazio()) {
-                arvoreAVL.balanceamento(arvoreAVL, p.topo());
-                p.desempilhar();
+            while(!pilha.vazio()) {
+                arvoreAVL.balanceamento(arvoreAVL, pilha.topo());
+                pilha.desempilhar();
             }
         }
     }
@@ -62,18 +62,18 @@ public class ArvoreAVL implements IArvoreAVL {
                             q.esquerdo = null;
                         }
                         else if(p.direito != null) {
-                            NoAVL x = menor(p.direito);
-                            remove_elemento(arvoreAVL,x.lista.primeiro.texto);
-                            x.direito = p.direito;
-                            x.esquerdo = p.esquerdo;
-                            q.esquerdo = x;
+                            NoAVL no = menor(p.direito);
+                            remove_elemento(arvoreAVL,no.lista.primeiro.texto);
+                            no.direito = p.direito;
+                            no.esquerdo = p.esquerdo;
+                            q.esquerdo = no;
                         }
                         else if(p.esquerdo != null) {
-                            NoAVL x = maior(p.esquerdo);
-                            remove_elemento(arvoreAVL,x.lista.primeiro.texto);
-                            x.direito = p.direito;
-                            x.esquerdo = p.esquerdo;
-                            q.esquerdo = x;
+                            NoAVL no = maior(p.esquerdo);
+                            remove_elemento(arvoreAVL,no.lista.primeiro.texto);
+                            no.direito = p.direito;
+                            no.esquerdo = p.esquerdo;
+                            q.esquerdo = no;
                         }
                     }
                     else if(q.direito == p) {
@@ -81,35 +81,35 @@ public class ArvoreAVL implements IArvoreAVL {
                             q.direito = null;
                         }
                         else if(p.direito != null) {
-                            NoAVL x = menor(p.direito);
-                            remove_elemento(arvoreAVL,x.lista.primeiro.texto);
-                            x.direito = p.direito;
-                            x.esquerdo = p.esquerdo;
-                            q.direito = x;
+                            NoAVL no = menor(p.direito);
+                            remove_elemento(arvoreAVL,no.lista.primeiro.texto);
+                            no.direito = p.direito;
+                            no.esquerdo = p.esquerdo;
+                            q.direito = no;
                         }
                         else if(p.esquerdo != null) {
-                            NoAVL x = maior(p.esquerdo);
-                            remove_elemento(arvoreAVL,x.lista.primeiro.texto);
-                            x.direito = p.direito;
-                            x.esquerdo = p.esquerdo;
-                            q.direito = x;
+                            NoAVL no = maior(p.esquerdo);
+                            remove_elemento(arvoreAVL,no.lista.primeiro.texto);
+                            no.direito = p.direito;
+                            no.esquerdo = p.esquerdo;
+                            q.direito = no;
                         }
                     }
                     else if(p == arvoreAVL.raiz) {
                         if(p.esquerdo == null && p.direito == null) {
-                            p = null;
+                            arvoreAVL.raiz = null; //p = null;
                         }
                         else if(p.direito != null) {
-                            NoAVL x = menor(p.direito);
-                            remove_elemento(arvoreAVL,x.lista.primeiro.texto);
-                            x.direito = p.direito;
-                            x.esquerdo = p.esquerdo;
+                            NoAVL no = menor(p.direito);
+                            remove_elemento(arvoreAVL,no.lista.primeiro.texto);
+                            no.direito = p.direito;
+                            no.esquerdo = p.esquerdo;
                         }
                         else if(p.esquerdo != null) {
-                            NoAVL x = maior(p.esquerdo);
-                            remove_elemento(arvoreAVL,x.lista.primeiro.texto);
-                            x.direito = p.direito;
-                            x.esquerdo = p.esquerdo;
+                            NoAVL no = maior(p.esquerdo);
+                            remove_elemento(arvoreAVL,no.lista.primeiro.texto);
+                            no.direito = p.direito;
+                            no.esquerdo = p.esquerdo;
                         }
                     }
                     return true;
@@ -191,11 +191,11 @@ public class ArvoreAVL implements IArvoreAVL {
         if (no == null) {
             return null;
         }
-        NoAVL n = no;
-        while (n.esquerdo != null) {
-            n = n.esquerdo;
+        NoAVL p = no;
+        while (p.esquerdo != null) {
+            p = p.esquerdo;
         }
-        return n;
+        return p;
     }
 
     public int altura (ArvoreAVL arvoreAVL,NoAVL no) {
