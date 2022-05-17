@@ -53,7 +53,8 @@ public class FuncoesApp {
                         p.lista.insereOrdenado(texto, 1, nomeArquivo);
                     }
 
-                } else {
+                }
+                else {
                     arvoreAVL.insere_elemento(arvoreAVL, texto, 1, nomeArquivo);
                 }
             }
@@ -101,7 +102,8 @@ public class FuncoesApp {
             while(texto.compareTo(p.lista.primeiro.texto) != 0) { // enquanto for diferente de 0 ele vai andar pela ArvoreAVL
                 if (texto.compareTo(p.lista.primeiro.texto) >= 0) {
                     p = p.direito;
-                } else if (texto.compareTo(p.lista.primeiro.texto) < 0) {
+                }
+                else if (texto.compareTo(p.lista.primeiro.texto) < 0) {
                     p = p.esquerdo;
                 }
             }

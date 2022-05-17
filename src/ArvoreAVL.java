@@ -1,18 +1,19 @@
-public class ArvoreAVL implements IArvoreAVL { //Utilizamos interface para organizar os metodos.
+//Utilizamos interface para organizar os metodos.
+public class ArvoreAVL implements IArvoreAVL {
     public NoAVL raiz;
 
     public ArvoreAVL() {
         this.raiz = null;
     }
 
-    public void insere_elemento(ArvoreAVL a, String texto, int frequencia, String nomeArquivo) {
-        if(a.raiz.lista.primeiro == null) {
-            a.raiz = new NoAVL();
-            a.raiz.lista.inserePrimeiro(texto, frequencia, nomeArquivo);
+    public void insere_elemento(ArvoreAVL arvoreAVL, String texto, int frequencia, String nomeArquivo) {
+        if(arvoreAVL.raiz.lista.primeiro == null) {
+            arvoreAVL.raiz = new NoAVL();
+            arvoreAVL.raiz.lista.inserePrimeiro(texto, frequencia, nomeArquivo);
         }
         else {
-            Pilha p = new Pilha(a.altura(a, a.raiz) + 1);
-            NoAVL no = a.raiz;
+            Pilha p = new Pilha(arvoreAVL.altura(arvoreAVL, arvoreAVL.raiz) + 1);
+            NoAVL no = arvoreAVL.raiz;
             NoAVL q = null;
             while(no != null) {
                 if(texto.compareTo(no.lista.primeiro.texto) >= 0) {
@@ -41,14 +42,14 @@ public class ArvoreAVL implements IArvoreAVL { //Utilizamos interface para organ
             }
 
             while(!p.vazio()) {
-                a.balanceamento(a, p.topo());
+                arvoreAVL.balanceamento(arvoreAVL, p.topo());
                 p.desempilhar();
             }
         }
     }
 
-    public boolean remove_elemento(ArvoreAVL a, String texto) {
-        NoAVL p = a.raiz;
+    public boolean remove_elemento(ArvoreAVL arvoreAVL, String texto) {
+        NoAVL p = arvoreAVL.raiz;
         NoAVL q = null;
         if (p == null) {
             return false;
@@ -62,14 +63,14 @@ public class ArvoreAVL implements IArvoreAVL { //Utilizamos interface para organ
                         }
                         else if(p.direito != null) {
                             NoAVL x = menor(p.direito);
-                            remove_elemento(a,x.lista.primeiro.texto);
+                            remove_elemento(arvoreAVL,x.lista.primeiro.texto);
                             x.direito = p.direito;
                             x.esquerdo = p.esquerdo;
                             q.esquerdo = x;
                         }
                         else if(p.esquerdo != null) {
                             NoAVL x = maior(p.esquerdo);
-                            remove_elemento(a,x.lista.primeiro.texto);
+                            remove_elemento(arvoreAVL,x.lista.primeiro.texto);
                             x.direito = p.direito;
                             x.esquerdo = p.esquerdo;
                             q.esquerdo = x;
@@ -81,32 +82,32 @@ public class ArvoreAVL implements IArvoreAVL { //Utilizamos interface para organ
                         }
                         else if(p.direito != null) {
                             NoAVL x = menor(p.direito);
-                            remove_elemento(a,x.lista.primeiro.texto);
+                            remove_elemento(arvoreAVL,x.lista.primeiro.texto);
                             x.direito = p.direito;
                             x.esquerdo = p.esquerdo;
                             q.direito = x;
                         }
                         else if(p.esquerdo != null) {
                             NoAVL x = maior(p.esquerdo);
-                            remove_elemento(a,x.lista.primeiro.texto);
+                            remove_elemento(arvoreAVL,x.lista.primeiro.texto);
                             x.direito = p.direito;
                             x.esquerdo = p.esquerdo;
                             q.direito = x;
                         }
                     }
-                    else if(p == a.raiz) {
+                    else if(p == arvoreAVL.raiz) {
                         if(p.esquerdo == null && p.direito == null) {
                             p = null;
                         }
                         else if(p.direito != null) {
                             NoAVL x = menor(p.direito);
-                            remove_elemento(a,x.lista.primeiro.texto);
+                            remove_elemento(arvoreAVL,x.lista.primeiro.texto);
                             x.direito = p.direito;
                             x.esquerdo = p.esquerdo;
                         }
                         else if(p.esquerdo != null) {
                             NoAVL x = maior(p.esquerdo);
-                            remove_elemento(a,x.lista.primeiro.texto);
+                            remove_elemento(arvoreAVL,x.lista.primeiro.texto);
                             x.direito = p.direito;
                             x.esquerdo = p.esquerdo;
                         }
@@ -125,8 +126,8 @@ public class ArvoreAVL implements IArvoreAVL { //Utilizamos interface para organ
         }
     }
 
-    public boolean existe_elemento(ArvoreAVL a,String texto) {
-        NoAVL p = a.raiz;
+    public boolean existe_elemento(ArvoreAVL arvoreAVL,String texto) {
+        NoAVL p = arvoreAVL.raiz;
         if (raiz == null) {
             return false;
         }
@@ -197,15 +198,15 @@ public class ArvoreAVL implements IArvoreAVL { //Utilizamos interface para organ
         return n;
     }
 
-    public int altura (ArvoreAVL a,NoAVL no) {
-        int altura_esquerdo = -1;
-        int altura_direito = -1;
+    public int altura (ArvoreAVL arvoreAVL,NoAVL no) {
+        int altura_esquerdo;
+        int altura_direito;
         if (no == null) {
             return -1;
         }
         else {
-            altura_esquerdo = altura(a,no.esquerdo);
-            altura_direito = altura(a,no.direito);
+            altura_esquerdo = altura(arvoreAVL,no.esquerdo);
+            altura_direito = altura(arvoreAVL,no.direito);
             if (altura_esquerdo < altura_direito) {
                 return altura_direito + 1;
             }
@@ -213,8 +214,8 @@ public class ArvoreAVL implements IArvoreAVL { //Utilizamos interface para organ
         return altura_esquerdo + 1;
     }
 
-    public void rotacao_esquerdo(ArvoreAVL a, NoAVL no) {
-        NoAVL p = a.raiz;
+    public void rotacao_esquerdo(ArvoreAVL arvoreAVL, NoAVL no) {
+        NoAVL p = arvoreAVL.raiz;
         NoAVL q = null;
 
         while (p != no) {
@@ -227,18 +228,18 @@ public class ArvoreAVL implements IArvoreAVL { //Utilizamos interface para organ
             }
         }
 
-        if (p == a.raiz) {
+        if (p == arvoreAVL.raiz) {
             if(p.direito.esquerdo != null) {
-                a.raiz = p.direito.esquerdo;
+                arvoreAVL.raiz = p.direito.esquerdo;
                 p.direito.esquerdo = null;
-                a.raiz.direito = p.direito;
+                arvoreAVL.raiz.direito = p.direito;
                 p.direito = null;
             }
             else {
-                a.raiz = p.direito;
+                arvoreAVL.raiz = p.direito;
                 p.direito = null;
             }
-            a.raiz.esquerdo = p;
+            arvoreAVL.raiz.esquerdo = p;
         }
         else if(q.esquerdo == p) {
             if(p.direito.esquerdo != null) {
@@ -268,8 +269,8 @@ public class ArvoreAVL implements IArvoreAVL { //Utilizamos interface para organ
         }
     }
 
-    public void rotacao_direito(ArvoreAVL a, NoAVL no) {
-        NoAVL p = a.raiz;
+    public void rotacao_direito(ArvoreAVL arvoreAVL, NoAVL no) {
+        NoAVL p = arvoreAVL.raiz;
         NoAVL q = null;
 
         while (p != no) {
@@ -282,18 +283,18 @@ public class ArvoreAVL implements IArvoreAVL { //Utilizamos interface para organ
             }
         }
 
-        if (p == a.raiz) {
+        if (p == arvoreAVL.raiz) {
             if(p.esquerdo.direito != null) {
-                a.raiz = p.esquerdo.direito;
+                arvoreAVL.raiz = p.esquerdo.direito;
                 p.esquerdo.direito = null;
-                a.raiz.esquerdo = p.esquerdo;
+                arvoreAVL.raiz.esquerdo = p.esquerdo;
                 p.esquerdo = null;
             }
             else {
-                a.raiz = p.esquerdo;
+                arvoreAVL.raiz = p.esquerdo;
                 p.esquerdo = null;
             }
-            a.raiz.direito = p;
+            arvoreAVL.raiz.direito = p;
         }
         else if(q.esquerdo == p) {
             if(p.esquerdo.direito != null) {
@@ -323,12 +324,12 @@ public class ArvoreAVL implements IArvoreAVL { //Utilizamos interface para organ
         }
     }
 
-    public void balanceamento(ArvoreAVL a, NoAVL no) {
-        if((a.altura(a, no.esquerdo) - a.altura(a, no.direito)) < -1) {
-            a.rotacao_esquerdo(a, no);
+    public void balanceamento(ArvoreAVL arvoreAVL, NoAVL no) {
+        if((arvoreAVL.altura(arvoreAVL, no.esquerdo) - arvoreAVL.altura(arvoreAVL, no.direito)) < -1) {
+            arvoreAVL.rotacao_esquerdo(arvoreAVL, no);
         }
-        else if((a.altura(a, no.esquerdo) - a.altura(a, no.direito)) > 1) {
-            a.rotacao_direito(a, no);
+        else if((arvoreAVL.altura(arvoreAVL, no.esquerdo) - arvoreAVL.altura(arvoreAVL, no.direito)) > 1) {
+            arvoreAVL.rotacao_direito(arvoreAVL, no);
         }
     }
 }

@@ -64,15 +64,15 @@ public class LSE implements ILSE{
             insereUltimo(texto, frequencia, nomeArquivo);
         }
         else {
-            No x = primeiro;
-            No y = null;
-            while(frequencia > x.frequencia) {
-                y = x;
-                x = x.proximo;
+            No p = primeiro;
+            No q = null;
+            while(frequencia > p.frequencia) {
+                q = p;
+                p = p.proximo;
             }
-            No p = new No(texto,frequencia, nomeArquivo);
-            p.proximo = x;
-            y.proximo = p;
+            No pn = new No(texto,frequencia, nomeArquivo);
+            p.proximo = p;
+            q.proximo = pn;
         }
     }
 
