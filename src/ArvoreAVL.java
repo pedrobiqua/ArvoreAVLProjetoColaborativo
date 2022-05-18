@@ -6,13 +6,20 @@ public class ArvoreAVL implements IArvoreAVL {
         this.raiz = null;
     }
 
+    /**
+     * Insere elemento na nossa arvore.
+     * @param arvoreAVL Arvore Avl.
+     * @param texto Texto a ser inserido na arvore.
+     * @param frequencia Frequecia da palavra a ser inserida.
+     * @param nomeArquivo Nome do arquivo txt analisado.
+     */
     public void insere_elemento(ArvoreAVL arvoreAVL, String texto, int frequencia, String nomeArquivo) {
         if(arvoreAVL.raiz.lista.primeiro == null) {
             arvoreAVL.raiz = new NoAVL();
             arvoreAVL.raiz.lista.inserePrimeiro(texto, frequencia, nomeArquivo);
         }
         else {
-            Pilha pilha = new Pilha(arvoreAVL.altura(arvoreAVL, arvoreAVL.raiz) + 1);
+            Pilha pilha = new Pilha(25);
             NoAVL p = arvoreAVL.raiz;
             NoAVL q = null;
             while(p != null) {
@@ -40,7 +47,8 @@ public class ArvoreAVL implements IArvoreAVL {
             else if(p.lista.primeiro.texto.compareTo(q.lista.primeiro.texto) < 0) {
                 q.esquerdo = p;
             }
-
+            
+            //logo apos inserir efetua o banceamento.
             while(!pilha.vazio()) {
                 arvoreAVL.balanceamento(arvoreAVL, pilha.topo());
                 pilha.desempilhar();
@@ -48,6 +56,11 @@ public class ArvoreAVL implements IArvoreAVL {
         }
     }
 
+    /**
+     * Metodo para remover elemento(Texto) da arvore
+     * @param arvoreAVL Arvore AVL
+     * @param texto Texto/elemento a ser removido da arvore
+     */
     public boolean remove_elemento(ArvoreAVL arvoreAVL, String texto) {
         NoAVL p = arvoreAVL.raiz;
         NoAVL q = null;
@@ -126,6 +139,11 @@ public class ArvoreAVL implements IArvoreAVL {
         }
     }
 
+    /**
+     * Verifica se existe elemento e printa na tela se existe ou não.
+     * @param arvoreAVL Arvore AVL
+     * @param texto Texto/elemento a ser removido da arvore.
+     */
     public boolean existe_elemento(ArvoreAVL arvoreAVL,String texto) {
         NoAVL p = arvoreAVL.raiz;
         if (raiz == null) {
@@ -149,6 +167,10 @@ public class ArvoreAVL implements IArvoreAVL {
         }
     }
 
+    /**
+     * Imprime a arvore no sistema pre ordem|raiz -> esquerda -> direita|
+     * @param no Raiz da arvore
+     */
     public void imprime_preOrdem(NoAVL no) {
         if (no != null) {
             no.lista.imprime();
@@ -158,6 +180,10 @@ public class ArvoreAVL implements IArvoreAVL {
         }
     }
 
+    /**
+     * Imprime a arvore no sistema in ordem|esquerda -> raiz -> direita|
+     * @param no Raiz da arvore
+     */
     public void imprime_inOrdem(NoAVL no) {
         if (no != null) {
             imprime_inOrdem(no.esquerdo);
@@ -167,6 +193,10 @@ public class ArvoreAVL implements IArvoreAVL {
         }
     }
 
+    /**
+     * Imprime a arvore no sistema pos ordem|esquerda -> direita -> raiz|
+     * @param no Raiz da arvore
+     */
     public void imprime_posOrdem(NoAVL no) {
         if (no != null) {
             imprime_posOrdem(no.esquerdo);
@@ -176,6 +206,10 @@ public class ArvoreAVL implements IArvoreAVL {
         }
     }
 
+    /**
+     * Retorna o no Maior
+     * @param no No de referência
+     */
     public NoAVL maior(NoAVL no) {
         if (no == null) {
             return null;
@@ -187,6 +221,10 @@ public class ArvoreAVL implements IArvoreAVL {
         return p;
     }
 
+    /**
+     * Retorna o no Menor
+     * @param no No de referência
+     */
     public NoAVL menor(NoAVL no) {
         if (no == null) {
             return null;
@@ -198,6 +236,11 @@ public class ArvoreAVL implements IArvoreAVL {
         return p;
     }
 
+    /**
+     * Retorna altura
+     * @param arvoreAVL Arvore AVL
+     * @param no Parametro a ser análisado
+     */
     public int altura (ArvoreAVL arvoreAVL,NoAVL no) {
         int altura_esquerdo;
         int altura_direito;
@@ -214,6 +257,11 @@ public class ArvoreAVL implements IArvoreAVL {
         return altura_esquerdo + 1;
     }
 
+    /**
+     * Rotação para organizar a arvore.
+     * @param arvoreAVL Arvore AVL
+     * @param no No da arvore.
+     */
     public void rotacao_esquerdo(ArvoreAVL arvoreAVL, NoAVL no) {
         NoAVL p = arvoreAVL.raiz;
         NoAVL q = null;
@@ -269,6 +317,11 @@ public class ArvoreAVL implements IArvoreAVL {
         }
     }
 
+    /**
+     * Rotação para organizar a arvore.
+     * @param arvoreAVL Arvore AVL
+     * @param no No da arvore.
+     */
     public void rotacao_direito(ArvoreAVL arvoreAVL, NoAVL no) {
         NoAVL p = arvoreAVL.raiz;
         NoAVL q = null;
@@ -324,6 +377,12 @@ public class ArvoreAVL implements IArvoreAVL {
         }
     }
 
+    /**
+     * Balanceamento utilizado para balancear a arvore.
+     * No balanceamento conseguimos ver se está pendendo para um lado.
+     * @param arvoreAVL Arvore AVL
+     * @param no No da arvore.
+     */
     public void balanceamento(ArvoreAVL arvoreAVL, NoAVL no) {
         if((arvoreAVL.altura(arvoreAVL, no.esquerdo) - arvoreAVL.altura(arvoreAVL, no.direito)) < -1) {
             arvoreAVL.rotacao_esquerdo(arvoreAVL, no);

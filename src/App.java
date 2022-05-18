@@ -32,17 +32,18 @@ public class App {
             switch (opcao) {
                 case 1:
                     System.out.println("------------------------------------------------------------");
-                    arvoreAVL.insere_elemento(arvoreAVL, "rapaz", 5, "livro.txt");
+                    //arvoreAVL.insere_elemento(arvoreAVL, "rapaz", 5, "livro.txt");
                     System.out.println("Insere em IN ORDEM");
                     arvoreAVL.imprime_inOrdem(arvoreAVL.raiz);
                     System.out.println("------------------------------------------------------------");
                     System.out.println("Tamanho da arvore do lado esquerdo: " + arvoreAVL.altura(arvoreAVL, arvoreAVL.raiz.esquerdo)); //talvez é a quantidade de nos no lado esquerdo
                     System.out.println("Tamanho da arvore do lado direito: " + arvoreAVL.altura(arvoreAVL, arvoreAVL.raiz.direito)); //talvez é a quantidade de nos no lado direito
                     System.out.println("------------------------------------------------------------");
-                    arvoreAVL.existe_elemento(arvoreAVL, "luffy");
-                    arvoreAVL.existe_elemento(arvoreAVL, "caminhao");
+                    arvoreAVL.existe_elemento(arvoreAVL, "computador");
+                    arvoreAVL.existe_elemento(arvoreAVL, "bola");
                     System.out.println("------------------------------------------------------------");
                     arquivo.pesquisa(arvoreAVL, "computador");
+                    arquivo.pesquisa(arvoreAVL, "bola");
                     System.out.println("------------------------------------------------------------");
                     break;
                 
@@ -54,26 +55,28 @@ public class App {
                     System.out.println("Tamanho da arvore do lado esquerdo: " + arvoreAVL.altura(arvoreAVL, arvoreAVL.raiz.esquerdo)); //talvez é a quantidade de nos no lado esquerdo
                     System.out.println("Tamanho da arvore do lado direito: " + arvoreAVL.altura(arvoreAVL, arvoreAVL.raiz.direito)); //talvez é a quantidade de nos no lado direito
                     System.out.println("------------------------------------------------------------");
-                    arvoreAVL.existe_elemento(arvoreAVL, "luffy");
-                    arvoreAVL.existe_elemento(arvoreAVL, "caminhao");
+                    arvoreAVL.existe_elemento(arvoreAVL, "computador");
+                    arvoreAVL.existe_elemento(arvoreAVL, "bola");
                     System.out.println("------------------------------------------------------------");
                     arquivo.pesquisa(arvoreAVL, "computador");
+                    arquivo.pesquisa(arvoreAVL, "bola");
                     System.out.println("------------------------------------------------------------");
                     break;
                 
                 case 3: 
                     System.out.println("------------------------------------------------------------");
-                    arvoreAVL.remove_elemento(arvoreAVL, "zeus");
+                    //arvoreAVL.remove_elemento(arvoreAVL, "computador");
                     System.out.println("Insere em PRE ORDEM");
                     arvoreAVL.imprime_preOrdem(arvoreAVL.raiz);
                     System.out.println("------------------------------------------------------------");
                     System.out.println("Tamanho da arvore do lado esquerdo: " + arvoreAVL.altura(arvoreAVL, arvoreAVL.raiz.esquerdo)); //talvez é a quantidade de nos no lado esquerdo
                     System.out.println("Tamanho da arvore do lado direito: " + arvoreAVL.altura(arvoreAVL, arvoreAVL.raiz.direito)); //talvez é a quantidade de nos no lado direito
                     System.out.println("------------------------------------------------------------");
-                    arvoreAVL.existe_elemento(arvoreAVL, "luffy");
-                    arvoreAVL.existe_elemento(arvoreAVL, "caminhao");
+                    arvoreAVL.existe_elemento(arvoreAVL, "computador");
+                    arvoreAVL.existe_elemento(arvoreAVL, "bola");
                     System.out.println("------------------------------------------------------------");
                     arquivo.pesquisa(arvoreAVL, "computador");
+                    arquivo.pesquisa(arvoreAVL, "bola");
                     System.out.println("------------------------------------------------------------");
                     break;
                 
